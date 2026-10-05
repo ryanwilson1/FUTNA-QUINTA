@@ -123,6 +123,56 @@ label{display:block;font-size:.82rem;color:var(--mut);margin:0 0 5px 2px;font-we
 .gmsg b{display:block;font-size:clamp(1.6rem,8.5vw,2.6rem);font-weight:900;letter-spacing:-.5px;color:#fff;text-shadow:0 3px 0 #0b2a16,0 0 18px rgba(74,222,128,.7);line-height:1.05;overflow-wrap:anywhere}
 .gmsg span{display:inline-block;margin-top:8px;background:#050805;color:var(--lime);border:2px solid var(--lime);padding:6px 14px;border-radius:99px;font-weight:900;font-size:clamp(.9rem,4vw,1.15rem);overflow-wrap:anywhere;max-width:100%}
 @media(prefers-reduced-motion:reduce){.gball,.ggoal{display:none}.gscene{top:18vh}}
+select{width:100%;padding:14px;border-radius:14px;border:2px solid var(--line);background:rgba(255,255,255,.1);color:#fff;font-size:16px;margin-bottom:12px;min-height:52px;outline:none}
+option{color:#111}
+select.mv{width:auto;max-width:96px;min-height:40px;padding:6px;margin:0;font-size:.85rem}
+input[type=checkbox]{width:24px;height:24px;min-height:0;padding:0;margin:0;accent-color:var(--lime);flex:none}
+.tabs,.seg2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tabs button,.seg2 button{min-height:52px;font-size:.92rem;padding:8px 6px;background:rgba(255,255,255,.1);color:#fff;box-shadow:none;border:2px solid var(--line)}
+.tabs button.on,.seg2 button.on{background:var(--lime);color:#04180a;border-color:var(--lime)}
+.tabs{margin-bottom:14px}
+button.big{min-height:64px;font-size:1.25rem}
+.clkc{text-align:center;background:linear-gradient(160deg,#050805,#0b2a16)}
+.clk{font-size:clamp(3.6rem,21vw,5.6rem);font-weight:900;font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-2px}
+.clk.running{color:var(--lime)}.clk.paused{color:var(--yel)}.clk.done{color:var(--red);animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:.35}}
+.cls{font-weight:900;margin:8px 0 14px;color:var(--mut)}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;text-align:center}
+.vs b{font-size:1.4rem;color:var(--mut)}.vs small,.nx small{display:block;color:var(--mut);font-weight:700;margin-top:6px}
+.tpill{display:inline-block;padding:8px 14px;border-radius:99px;font-weight:900;border:2px solid rgba(255,255,255,.35);letter-spacing:.5px}
+.nx{display:flex;align-items:center;gap:10px;padding:6px 0}.nx small{margin:0}
+.tm .head{margin-bottom:12px}
+.cks{display:grid;gap:8px;margin-bottom:12px;max-height:260px;overflow:auto}
+.ck{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;font-weight:800;margin:0;color:#fff;font-size:1rem;min-height:48px}
+.hi{flex-wrap:wrap;gap:4px 12px}
+#tbar{position:fixed;top:0;left:0;right:0;z-index:7;display:none;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:#050805;border-bottom:2px solid var(--lime);font-weight:900;cursor:pointer;font-size:.9rem}
+#tbar b{font-size:1.5rem;color:var(--lime);font-variant-numeric:tabular-nums}
+body.hasbar header{padding-top:calc(76px + env(safe-area-inset-top))}
+#fim,#shuf{position:fixed;inset:0;z-index:8;pointer-events:none;display:grid;place-items:center;padding:20px}
+.fimb,.shb{background:rgba(5,8,5,.93);border:3px solid var(--lime);border-radius:22px;padding:22px 26px;text-align:center;max-width:100%;animation:gout 5s linear both}
+.shb{animation:pop .3s ease both}
+.fimb b,.shb b{display:block;font-size:clamp(1.8rem,9vw,2.8rem);font-weight:900;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+.fimb span{display:block;margin-top:8px;color:var(--lime);font-weight:800;font-size:1.1rem}
+#shn{display:block;margin-top:10px;font-size:1.6rem;font-weight:900;color:var(--lime);min-height:2rem}
+.clk{font-size:clamp(4.6rem,27vw,7.5rem)}
+.clkc.running{border-color:var(--lime);box-shadow:0 0 0 2px var(--lime),0 0 34px rgba(74,222,128,.35)}
+.clkc.paused{border-color:var(--yel)}.clkc.done{border-color:var(--red);box-shadow:0 0 0 2px var(--red),0 0 34px rgba(239,68,68,.4)}
+.clk.running{text-shadow:0 0 26px rgba(74,222,128,.55)}
+.clk.low{color:var(--red);text-shadow:0 0 26px rgba(239,68,68,.6);animation:blink 1s step-end infinite}
+.cbar{height:10px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden;margin:12px 0 0}
+.cbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#4ade80,#16a34a);border-radius:99px;transition:width .3s linear}
+#fim{display:block;pointer-events:none;padding:0}
+.fx{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;overflow:hidden;pointer-events:auto;cursor:pointer;background:rgba(0,0,0,.92);animation:fxin 6.2s linear both,fxflash .5s ease-out}
+@keyframes fxin{0%{opacity:0}3%,93%{opacity:1}100%{opacity:0}}
+@keyframes fxflash{0%{background:#fff}100%{background:rgba(0,0,0,.92)}}
+.fx1{margin:0;font-size:clamp(2.3rem,15vw,5.5rem);line-height:1.05;color:#fff;font-weight:900;overflow-wrap:anywhere;text-shadow:0 0 30px #ef4444,0 0 60px #f97316,0 4px 0 #7f1d1d;animation:slam .6s cubic-bezier(.2,1.6,.4,1) both,shake .3s linear .6s 5}
+@keyframes slam{0%{transform:scale(4);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes shake{0%,100%{transform:translate(0)}25%{transform:translate(-7px,3px) rotate(-1deg)}75%{transform:translate(7px,-3px) rotate(1deg)}}
+.fx2{margin:20px 0 0;font-size:clamp(1.6rem,10vw,3.4rem);color:#facc15;font-weight:900;animation:slam .6s cubic-bezier(.2,1.6,.4,1) .35s both,glow .9s ease-in-out .95s infinite alternate}
+@keyframes glow{from{text-shadow:0 0 6px #facc15}to{text-shadow:0 0 32px #facc15}}
+.fx small{margin-top:28px;color:#8da193;font-weight:700}
+.fx i{position:absolute;top:-70px;left:var(--x);font-style:normal;font-size:var(--s,40px);opacity:.85;animation:fall var(--d,3s) linear var(--dl,0s) infinite}
+@keyframes fall{to{transform:translate3d(0,120vh,0) rotate(540deg)}}
 </style>
 </head>
 <body>
@@ -140,6 +190,7 @@ label{display:block;font-size:.82rem;color:var(--mut);margin:0 0 5px 2px;font-we
 </div>
 <div id="toast"></div>
 <div id="goal" aria-live="polite"></div>
+<div id="tbar" onclick="setTab('times')"></div><div id="fim"></div><div id="shuf"></div>
 <div class="wrap">
 <header>
   <h1><span class="hball">⚽</span> FUT dos <b>CRIA</b></h1>
@@ -183,13 +234,17 @@ async function load(){
     const m = await api("/matches?active=eq.true&order=id.desc&limit=1");
     match = m[0]||null;
     players = match ? await api(`/players?match_id=eq.${match.id}&order=created_at.asc,id.asc`) : [];
+    if(match && !busyW){ try{ const r=await api(`/sorteio?match_id=eq.${match.id}`); const ns=r[0]?r[0].state:{}; lock=r[0]&&r[0].lock_until?{by:r[0].lock_by,until:Date.parse(r[0].lock_until)}:{by:null,until:0};
+      if(seenV!==null&&ns.v&&ns.v!==seenV&&ns.teams) toast("⚽ TIMES DEFINIDOS!");
+      seenV=ns.v||0; sorteio=ns; sorteioErr=false }catch{ sorteioErr=true } }
+    syncClock();
     const vouNow = players.filter(p=>p.status==="vou");
     if(known){ const nw=vouNow.filter(p=>!known.has(p.id)&&p.device_id!==device);
       if(nw.length){ toast("🔥 Novo jogador confirmado!"); nw.forEach(p=>{fresh[p.id]=Date.now()+6000;goal(p.name)}); setTimeout(()=>{if(!editing)render()},6100) } }
     known = new Set(vouNow.map(p=>p.id));
     if(msg.c==="err"&&msg.t.startsWith("Sem conexão")) msg={t:"",c:""};
   }catch(e){ msg = {t:"Sem conexão com o banco. Verifique o setup.",c:"err"}; lastSig="" }
-  const sig = JSON.stringify([match,players,msg,Object.keys(fresh).length]);
+  const sig = JSON.stringify([match,players,msg,Object.keys(fresh).length,sorteio,sorteioErr,isAdmin,lockedOther()]);
   if(!editing && sig!==lastSig){ lastSig=sig; render(); }
 }
 async function loadHist(){
@@ -213,6 +268,7 @@ function render(){
   if(adminOpen && isAdmin){ app.innerHTML=adminHTML(); return; }
   if(adminOpen){ app.innerHTML=loginHTML(); return; }
   if(!match){ app.innerHTML=`<div class="card empty">Nenhuma partida marcada ainda.</div>`; return; }
+  if(tab==="times"){ app.innerHTML=tabsHTML()+timesHTML(); return; }
   const g=G(), n=g.vou.length, max=match.max_players, full=n>=max, pct=Math.min(100,Math.round(n/max*100));
   const mine=players.find(p=>p.device_id===device), st=mine&&mine.status;
   const keepName=$("#nome")?$("#nome").value:"";
@@ -237,7 +293,7 @@ function render(){
       <div class="two"><button class="ghost" onclick="confirmar('talvez')">🟡 Talvez</button><button class="ghost" onclick="confirmar('nao')">🔴 Não vou</button></div>
       <div class="hint">Só quem está 🟢 Vou jogar ocupa vaga.</div>`;
   }
-  app.innerHTML=`
+  app.innerHTML=tabsHTML()+`
   <div class="card hero"><div class="tag">⚽ Próximo jogo</div>
     <div class="info"><div><span>📅</span>${esc(fmtDate(match.date))}</div><div><span>⏰</span>${esc(fmtTime(match.time))}</div><div><span>📍</span>${esc(match.location||"A definir")}</div></div>
     <div class="cnt"><span><b>${n} / ${max}</b> confirmados</span><span>${pct}%</span></div>
@@ -298,8 +354,8 @@ function loginHTML(){return `<div class="card"><h2>🔐 Área do admin</h2>
   <input id="pw" type="password" placeholder="Senha"><button onclick="login()">Entrar</button>
   <div class="msg err">${esc(msg.t)}</div>
   <button class="ghost" style="margin-top:8px" onclick="sair()">Voltar</button></div>`}
-function login(){ if($("#pw").value===ADMIN_PASSWORD){isAdmin=true;msg={t:"",c:""};render()} else {msg={t:"Senha incorreta.",c:"err"};render()} }
-function sair(){adminOpen=false;editing=false;msg={t:"",c:""};lastSig="";load()}
+function login(){ if($("#pw").value===ADMIN_PASSWORD){isAdmin=true;msg={t:"",c:""};if(loginTimes){loginTimes=false;adminOpen=false;editing=false;lastSig="";load()}else render()} else {msg={t:"Senha incorreta.",c:"err"};render()} }
+function sair(){loginTimes=false;adminOpen=false;editing=false;msg={t:"",c:""};lastSig="";load()}
 function admList(title,arr,promote){
   return `<div class="sec">${title} (${arr.length})</div>`+(arr.length?`<ol>${arr.map((p,i)=>`<li><em>${i+1}</em><span>${esc(p.name)}</span>${promote?`<button class="sm" onclick="promover(${p.id})">Promover</button>`:""}<button class="danger sm" onclick="remover(${p.id})">✕</button></li>`).join("")}</ol>`:`<div class="empty" style="padding:6px">—</div>`);
 }
@@ -390,6 +446,154 @@ function playGol(){
   }catch{}
 }
 sndLabel();
+
+/* ---------- SORTEIO / TIMES ---------- */
+let tab="presenca", sorteio={}, sorteioErr=false, seenV=null, off=0, lastSync=0, endKey=null, busyW=false, sz=5, mode="igual", src="conf", manSel=null, fin=false, loginTimes=false, lock={by:null,until:0}, sorting=false, confRst=false;
+const TM=[{e:"🟢",c:"#22c55e",t:"#04180a"},{e:"⚫",c:"#0a0a0a",t:"#fff"},{e:"🔵",c:"#3b82f6",t:"#fff"},{e:"🟠",c:"#f97316",t:"#1a0a00"},{e:"🟡",c:"#facc15",t:"#1a1500"},{e:"🔴",c:"#ef4444",t:"#fff"}];
+const tm=i=>TM[i%TM.length];
+const pill=i=>`<span class="tpill" style="background:${tm(i).c};color:${tm(i).t}">${tm(i).e} TIME ${i+1}</span>`;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const rnd=n=>{const u=new Uint32Array(1);crypto.getRandomValues(u);return u[0]%n};
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+const serverNow=()=>Date.now()+off;
+async function syncClock(){ if(Date.now()-lastSync<20000)return; lastSync=Date.now(); try{const t0=Date.now();const ms=await api("/rpc/server_ms",{method:"POST",body:{}});off=ms-(t0+Date.now())/2}catch{} }
+
+const TT=()=>sorteio.timer||{dur:600,status:"idle",used:0};
+const remMs=()=>{const t=TT();return t.dur*1000-(t.used||0)-(t.status==="running"?serverNow()-t.startedAt:0)};
+function effSt(){const t=TT();if(t.status==="idle")return"idle";return remMs()<=0?"done":t.status}
+const fmtClk=ms=>{const s=Math.max(0,Math.ceil(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")};
+const LBL={idle:"Aguardando início",running:"⚽ PARTIDA EM ANDAMENTO",paused:"⏸ PARTIDA PAUSADA",done:"🏁 TEMPO ESGOTADO!"};
+const lockedOther=()=>lock.until>serverNow()&&lock.by!==device;
+function tick(){
+  const st=effSt(), rem=remMs(), txt=fmtClk(rem), t=TT();
+  const c=$("#clk"); if(c){c.textContent=txt;c.className="clk "+st+(st==="running"&&rem<60000?" low":"")}
+  const cc=$("#clkc"); if(cc) cc.className="card clkc "+st;
+  const cb=$("#cbari"); if(cb) cb.style.width=Math.max(0,Math.min(100,rem/(t.dur*10)))+"%";
+  const l=$("#cls"); if(l) l.textContent=LBL[st];
+  const show=!!match&&st!=="idle"&&tab!=="times", b=$("#tbar");
+  document.body.classList.toggle("hasbar",show);
+  if(b){b.style.display=show?"flex":"none"; if(show) b.innerHTML=`<span>${st==="done"?"🏁 TEMPO ESGOTADO":st==="paused"?"⏸ PARTIDA PAUSADA":"⚽ PARTIDA EM ANDAMENTO"}</span><b>${txt}</b>`}
+  const k=t.rid||t.startedAt||0;
+  if(st==="done"&&endKey!==k){ endKey=k; if(rem>-8000) showFim(); if(!editing){lastSig="";render()} }
+}
+setInterval(tick,250);
+function closeFim(){$("#fim").innerHTML=""}
+function showFim(){
+  const e=$("#fim"), balls=[8,24,40,58,74,90].map((x,i)=>`<i style="--x:${x}vw;--s:${34+i%3*14}px;--d:${2.6+i*.4}s;--dl:${-i*.5}s">⚽</i>`).join("");
+  e.innerHTML=`<div class="fx" onclick="closeFim()">${balls}<h1 class="fx1">ACABOUUUUUUU! 🔥</h1><h2 class="fx2">⏰ TEMPO ESGOTADO!</h2><small>toque para fechar</small></div>`;
+  clearTimeout(showFim.t); showFim.t=setTimeout(closeFim,reduce?3000:6200);
+  if(!reduce&&navigator.vibrate) try{navigator.vibrate([250,100,250,100,500])}catch{}
+  playFim();
+}
+function playFim(){ if(!soundOn||!actx||actx.state!=="running")return; try{const t=actx.currentTime;[0,.4,.8].forEach((d,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type="square";o.frequency.value=i==2?1100:880;g.gain.setValueAtTime(.07,t+d);g.gain.linearRampToValueAtTime(0,t+d+(i==2?1:.3));o.connect(g);g.connect(actx.destination);o.start(t+d);o.stop(t+d+1.05)})}catch{} }
+function setTab(t){tab=t;lastSig="";render();tick();scrollTo(0,0)}
+
+async function save(patch,bump){
+  busyW=true; if(bump){patch={...patch,v:Date.now()};seenV=patch.v}
+  sorteio={...sorteio,...patch}; lastSig="";render();tick();
+  try{ await api("/rpc/patch_sorteio",{method:"POST",body:{p_match:match.id,p_patch:patch}}) }
+  catch{ toast("⚠️ Erro ao salvar. Rodou o SQL supabase-times-v2?") }
+  busyW=false;
+}
+/* cronômetro (público) */
+const rid=()=>Math.random().toString(36).slice(2,10);
+function timerStart(){const t=TT(), fresh=t.status!=="paused"||effSt()==="done";save({timer:{dur:t.dur,status:"running",used:fresh?0:(t.used||0),startedAt:serverNow(),rid:fresh?rid():t.rid}})}
+function timerPause(){const t=TT();save({timer:{...t,status:"paused",used:(t.used||0)+serverNow()-t.startedAt}})}
+function timerReset(){confRst=false;save({timer:{dur:TT().dur,status:"idle",used:0,rid:null}})}
+function setDur(v){let d; if(v==="c"){const m=parseFloat(String(prompt("Duração em minutos? (ex.: 8, 17, 25)","10")).replace(",","."));if(!m||m<=0||m>180){render();return}d=Math.round(m*60)}else d=Math.round(+v*60); save({timer:{dur:d,status:"idle",used:0,rid:null}})}
+
+/* sorteio */
+function makeTeams(names,size,md){
+  const a=shuffle([...names]); let k=Math.floor(a.length/size), teams=[], res=[];
+  if(k<2){k=2;md="equil"}
+  if(md==="igual"){for(let i=0;i<k;i++)teams.push(a.splice(0,size));res=a}
+  else{teams=Array.from({length:k},()=>[]);a.forEach((n,i)=>teams[i%k].push(n))}
+  return {teams:teams.map(p=>({players:p})),reserves:res};
+}
+async function sortear(){
+  if(sorting||lockedOther()) return;
+  const vou=G().vou, pool=src==="conf"?vou:vou.filter(p=>manSel&&manSel.has(p.id));
+  if(pool.length<2) return toast("Selecione pelo menos 2 jogadores");
+  if((sorteio.teams||[]).length && !confirm("Os times atuais serão substituídos. Deseja sortear novamente?")) return;
+  sorting=true;
+  try{ const ok=await api("/rpc/try_lock_sorteio",{method:"POST",body:{p_match:match.id,p_by:device,p_secs:15}});
+    if(ok===false){ sorting=false; toast("🎲 Outra pessoa já está sorteando"); return load() } }catch{}
+  const names=pool.map(p=>p.name), box=$("#shuf");
+  box.innerHTML=`<div class="shb"><b>🎲 EMBARALHANDO...</b><span id="shn"></span></div>`;
+  const iv=setInterval(()=>{const e=$("#shn");if(e)e.textContent=names[rnd(names.length)]},80);
+  const r=makeTeams(names,sz,mode);
+  await sleep(reduce?300:1900); clearInterval(iv);
+  box.innerHTML=`<div class="shb"><b>⚽ TIMES DEFINIDOS!</b></div>`; fin=false;
+  await save({size:sz,teams:r.teams,reserves:r.reserves,cur:[0,1],queue:r.teams.slice(2).map((_,i)=>i+2),timer:{dur:TT().dur,status:"idle",used:0,rid:null}},true);
+  await sleep(1100); box.innerHTML="";
+  try{ await api(`/sorteio?match_id=eq.${match.id}&lock_by=eq.${encodeURIComponent(device)}`,{method:"PATCH",body:{lock_until:null}}) }catch{}
+  sorting=false; lock={by:null,until:0}; lastSig=""; render();
+}
+function mover(from,i,dest){
+  if(dest==="")return;
+  const teams=JSON.parse(JSON.stringify(sorteio.teams||[])), res=[...(sorteio.reserves||[])];
+  const arr=from==="r"?res:teams[+from].players, n=arr.splice(i,1)[0];
+  (dest==="r"?res:teams[+dest].players).push(n);
+  save({teams,reserves:res});
+}
+function finalizar(stay){
+  const s=sorteio, cur=s.cur||[0,1], q=[...(s.queue||[])];
+  const out=stay==null?[...cur]:cur.filter(x=>x!==stay), keep=stay==null?[]:[stay];
+  while(keep.length<2&&q.length)keep.push(q.shift());
+  q.push(...out);
+  while(keep.length<2&&q.length)keep.push(q.shift());
+  const t=TT(); fin=false;
+  save({cur:keep,queue:q,hist:[...(s.hist||[]),{a:cur[0],b:cur[1],dur:t.dur}],timer:{dur:t.dur,status:"idle",used:0}});
+}
+function togSel(id,c){c?manSel.add(id):manSel.delete(id);render()}
+
+function tabsHTML(){return `<div class="tabs"><button class="${tab==="presenca"?"on":""}" onclick="setTab('presenca')">📋 Presença</button><button class="${tab==="times"?"on":""}" onclick="setTab('times')">⚽ Sortear Times</button></div>`}
+function clkCard(){
+  const t=TT(), st=effSt(), cm=t.dur/60, durs=[5,7,10,12,15,20];
+  const opts=durs.map(m=>`<option value="${m}" ${m===cm?"selected":""}>${m} minutos</option>`).join("")+(durs.includes(cm)?"":`<option value="${cm}" selected>${+cm.toFixed(1)} minutos</option>`)+`<option value="c">✏️ Personalizado…</option>`;
+  const run=t.status==="running"&&st!=="done";
+  return `<div id="clkc" class="card clkc ${st}"><div class="tag">⏱️ Cronômetro</div><div id="clk" class="clk ${st}">${fmtClk(remMs())}</div><div class="cbar"><i id="cbari"></i></div><div id="cls" class="cls">${LBL[st]}</div>
+  ${confRst?`<div class="in y"><b>Reiniciar o cronômetro?</b></div><div class="two"><button class="danger" onclick="timerReset()">SIM, REINICIAR</button><button class="ghost" onclick="confRst=false;render()">CANCELAR</button></div>`
+  :`<div class="two" style="margin-top:0"><button onclick="${run?"timerPause()":"timerStart()"}">${run?"⏸ PAUSAR":t.status==="paused"&&st!=="done"?"▶ CONTINUAR":"▶ INICIAR"}</button><button class="ghost" onclick="confRst=true;render()">🔄 REINICIAR</button></div>
+  <label style="margin-top:14px;text-align:left">Duração da partida</label><select onchange="setDur(this.value)">${opts}</select>`}
+  <div class="hint" style="margin:6px 0 0">Sincronizado para todos 📡</div></div>`;
+}
+function previewTxt(n){
+  if(n<2) return "Selecione pelo menos 2 jogadores.";
+  let k=Math.floor(n/sz), md=mode; if(k<2){k=2;md="equil"}
+  if(md==="igual") return `${k} times de ${sz}`+(n-k*sz?` + ${n-k*sz} reserva(s)`:"");
+  const b=Math.floor(n/k), x=n%k; return `${k} times equilibrados (${x?`${x}× ${b+1} e ${k-x}× ${b}`:`${b} cada`})`;
+}
+function setupCard(g){
+  const vou=g.vou; if(manSel===null) manSel=new Set(vou.map(p=>p.id));
+  const pool=src==="conf"?vou:vou.filter(p=>manSel.has(p.id));
+  return `<div class="card"><div class="tag">🎲 Sorteio</div>
+  <label>👥 Quantos jogadores por time?</label><select onchange="sz=+this.value;render()">${[3,4,5,6,7,8,9,10,11].map(n=>`<option value="${n}" ${n===sz?"selected":""}>${n} jogadores</option>`).join("")}</select>
+  <label>De onde vêm os jogadores</label><div class="seg2"><button class="${src==="conf"?"on":""}" onclick="src='conf';render()">🟢 Confirmados (${vou.length})</button><button class="${src==="man"?"on":""}" onclick="src='man';render()">✏️ Escolher</button></div>
+  ${src==="man"?`<div class="cks">${vou.map(p=>`<label class="ck"><input type="checkbox" ${manSel.has(p.id)?"checked":""} onchange="togSel(${p.id},this.checked)"><span>${esc(p.name)}</span></label>`).join("")||'<div class="empty">Ninguém confirmado.</div>'}</div>`:""}
+  <label>Como dividir</label><div class="seg2"><button class="${mode==="igual"?"on":""}" onclick="mode='igual';render()">Iguais + reservas</button><button class="${mode==="equil"?"on":""}" onclick="mode='equil';render()">Equilibrado</button></div>
+  <div class="hint" style="margin:0 0 12px"><b>${pool.length}</b> jogadores ${src==="conf"?"confirmados":"selecionados"} · ${previewTxt(pool.length)}</div>
+  ${lockedOther()?`<div class="hint" style="margin:0 0 10px">🎲 Sorteio sendo realizado...</div>`:""}<button class="big" onclick="sortear()" ${lockedOther()||sorting?"disabled":""}>🎲 SORTEAR TIMES</button></div>`;
+}
+const mvSel=(k,j,nt)=>`<select class="mv" onchange="mover('${k}',${j},this.value)"><option value="">↔ mover</option>${Array.from({length:nt},(_,x)=>x).filter(x=>x!==k).map(x=>`<option value="${x}">${tm(x).e} Time ${x+1}</option>`).join("")}${k==="r"?"":`<option value="r">🔄 Reservas</option>`}</select>`;
+function timesHTML(){
+  const s=sorteio, teams=s.teams||[], adm=true, g=G(); let h="";
+  if(sorteioErr) h+=`<div class="card"><div class="empty">⚠️ Falta rodar o <b>supabase-times.sql</b> no Supabase.</div></div>`;
+  h+=clkCard();
+  if(!teams.length){ h+=adm?setupCard(g):`<div class="card empty">Os times ainda não foram sorteados.</div>`; }
+  else{
+    const cur=s.cur||[0,1], q=s.queue||[], res=s.reserves||[], n=i=>teams[i]?teams[i].players.length:0;
+    h+=`<div class="card"><div class="tag">⚽ Partida atual</div><div class="vs"><div>${pill(cur[0])}<small>${n(cur[0])} jogadores</small></div><b>VS</b><div>${pill(cur[1])}<small>${n(cur[1])} jogadores</small></div></div>
+    ${adm?(fin?`<div class="in y" style="margin-top:14px"><b>Quem fica em campo?</b></div><div class="two"><button onclick="finalizar(${cur[0]})">${tm(cur[0]).e} Time ${cur[0]+1} fica</button><button onclick="finalizar(${cur[1]})">${tm(cur[1]).e} Time ${cur[1]+1} fica</button></div><div class="two"><button class="ghost" onclick="finalizar(null)">Ambos saem</button><button class="ghost" onclick="fin=false;render()">Cancelar</button></div>`:`<button style="margin-top:14px" onclick="fin=true;render()">🏁 FINALIZAR PARTIDA</button>`):""}</div>
+    <div class="card"><div class="tag">🔄 Próxima partida</div>${q.length?q.map(i=>`<div class="nx">${pill(i)}<small>aguardando · ${n(i)} jogadores</small></div>`).join(""):`<div class="empty" style="padding:6px">Só 2 times: os mesmos voltam a jogar.</div>`}</div>`;
+    h+=teams.map((t,i)=>`<div class="card tm" style="animation-delay:${i*.12}s"><div class="head">${pill(i)}<b>${t.players.length}</b></div><ol>${t.players.map((nm,j)=>`<li><em>${j+1}</em><span>${esc(nm)}</span>${adm?mvSel(i,j,teams.length):""}</li>`).join("")}</ol></div>`).join("");
+    if(res.length) h+=`<div class="card"><div class="head"><h2>🔄 PRÓXIMOS / RESERVAS</h2><b>${res.length}</b></div><ol>${res.map((nm,j)=>`<li class="w"><em>${j+1}</em><span>${esc(nm)}</span>${adm?mvSel("r",j,teams.length):""}</li>`).join("")}</ol><div class="hint">Esses jogadores entram na próxima partida.</div></div>`;
+    if(adm) h+=setupCard(g);
+  }
+  const hs=s.hist||[];
+  if(hs.length) h+=`<div class="card"><div class="tag">🏆 Histórico das partidas</div>${hs.map((x,i)=>`<div class="hi"><span>🏆 PARTIDA ${i+1}</span><span>${tm(x.a).e} Time ${x.a+1} x ${tm(x.b).e} Time ${x.b+1} · ${Math.round(x.dur/6)/10} min · Finalizada</span></div>`).reverse().join("")}</div>`;
+  return h;
+}
 
 loadHist().then(load); setInterval(()=>{ if(!document.hidden) load() },POLL_MS);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
