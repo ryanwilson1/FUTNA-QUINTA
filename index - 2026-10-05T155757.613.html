@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14582d">
+<title>FUT dos Cria</title>
+<style>
+:root{--lime:#4ade80;--g:#16a34a;--g2:#15803d;--dk:#0b2a16;--card:rgba(6,32,17,.8);--line:rgba(255,255,255,.14);--tx:#fff;--mut:#a7c9b2;--red:#f87171;--yel:#facc15}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh;
+background:repeating-linear-gradient(90deg,#166534 0 60px,#14582d 60px 120px)}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 70% at 50% 0,rgba(0,0,0,0) 0,rgba(0,0,0,.35) 100%)}
+.field{position:absolute;left:50%;top:0;width:min(130vw,600px);margin-left:calc(min(130vw,600px)/-2);animation:scrollf 70s linear infinite;will-change:transform}
+.field svg{display:block;width:100%;height:auto}
+@keyframes scrollf{to{transform:translate3d(0,-50%,0)}}
+.light{position:absolute;top:-20%;left:-60%;width:220%;height:70%;background:radial-gradient(closest-side,rgba(255,255,255,.16),transparent);animation:sweep 18s ease-in-out infinite alternate}
+@keyframes sweep{to{transform:translate3d(30%,0,0)}}
+.ball,.fl{position:absolute;left:0;opacity:.2;will-change:transform}
+.ball{animation:pass var(--d,40s) linear var(--dl,0s) infinite;transform:translate3d(-20vw,0,0)}
+@keyframes pass{to{transform:translate3d(125vw,var(--dy,40px),0) rotate(720deg)}}
+.fl{animation:bob var(--d,9s) ease-in-out infinite alternate}
+@keyframes bob{from{transform:translate3d(0,0,0) rotate(-8deg)}to{transform:translate3d(14px,-22px,0) rotate(10deg)}}
+.pt{position:absolute;bottom:-10px;width:5px;height:5px;border-radius:50%;background:#fff;opacity:0;animation:rise var(--d,14s) linear var(--dl,0s) infinite}
+@keyframes rise{10%{opacity:.35}to{transform:translate3d(var(--dx,20px),-105vh,0);opacity:0}}
+.wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 14px calc(50px + env(safe-area-inset-bottom))}
+header{text-align:center;padding:calc(26px + env(safe-area-inset-top)) 10px 22px}
+h1{margin:0;font-size:2.4rem;font-weight:900;letter-spacing:-.5px;text-transform:uppercase;line-height:1;text-shadow:0 3px 0 rgba(0,0,0,.35)}
+h1 b{background:#050805;color:var(--lime);padding:2px 10px;border-radius:10px;margin-left:4px;display:inline-block;transform:rotate(-2deg)}
+.hball{display:inline-block;animation:hb 2.6s ease-in-out infinite}
+@keyframes hb{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(25deg)}}
+.sub{margin:10px 0 0;font-size:.95rem;font-weight:600;color:#d7f5e0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px;animation:fadeup .4s ease both}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}}
+.hero{background:linear-gradient(160deg,#fff 0,#e8fbee 100%);color:#08170d;border:0;box-shadow:0 10px 30px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border:10px solid rgba(22,163,74,.12);border-radius:50%}
+.tag{font-size:.78rem;font-weight:900;letter-spacing:1.6px;color:var(--lime);text-transform:uppercase;margin-bottom:12px}
+.hero .tag{color:var(--g2)}
+.info{display:grid;gap:10px;margin-bottom:16px;position:relative}
+.info div{display:flex;gap:12px;align-items:center;font-size:1.12rem;font-weight:800}
+.info span{width:40px;height:40px;display:grid;place-items:center;background:#0b2a16;border-radius:12px;font-size:1.15rem;flex:none}
+.cnt{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;color:#35533f}
+.cnt b{font-size:1.6rem;color:#08170d}
+.bar{height:14px;background:rgba(0,0,0,.12);border-radius:99px;overflow:hidden;margin:8px 0 0}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#4ade80,#16a34a);border-radius:99px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.badge{margin-top:12px;padding:10px;border-radius:12px;text-align:center;font-weight:900;background:#fef3c7;color:#92400e}
+h2{font-size:1.2rem;margin:0 0 12px;font-weight:900}
+input{width:100%;padding:16px;border-radius:14px;border:2px solid var(--line);background:rgba(255,255,255,.08);color:#fff;font-size:16px;margin-bottom:12px;outline:none;-webkit-appearance:none;appearance:none;min-height:54px;transition:border-color .2s,background .2s}
+input::placeholder{color:#8fb59d}
+input:focus{border-color:var(--lime);background:rgba(255,255,255,.14)}
+input[type=date],input[type=time]{color-scheme:dark}
+button{width:100%;min-height:56px;padding:15px;border:0;border-radius:14px;font-size:1.05rem;font-weight:900;cursor:pointer;color:#04180a;background:var(--lime);letter-spacing:.3px;box-shadow:0 4px 0 #15803d;transition:transform .12s,box-shadow .12s,filter .2s}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 #15803d}
+button:disabled{opacity:.5}
+@media(hover:hover){button:hover{filter:brightness(1.08)}li:hover{transform:translateX(3px)}}
+button.ghost{background:rgba(255,255,255,.1);color:#fff;border:2px solid var(--line);box-shadow:none}
+button.danger{background:transparent;color:var(--red);border:2px solid rgba(248,113,113,.4);box-shadow:none}
+button.sm{width:auto;min-height:40px;padding:8px 13px;font-size:.85rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}
+.seg button{min-height:52px;font-size:.88rem;padding:8px 4px;background:rgba(255,255,255,.1);color:#fff;box-shadow:none;border:2px solid var(--line)}
+.seg button.on{background:var(--lime);color:#04180a;border-color:var(--lime)}
+.in{background:rgba(74,222,128,.15);border:2px solid var(--lime);border-radius:16px;padding:16px;text-align:center;margin-bottom:4px;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+.in b{display:block;font-size:1.4rem}
+.in span{color:#d7f5e0;font-size:.95rem}
+.in.y{background:rgba(250,204,21,.13);border-color:var(--yel)}.in.r{background:rgba(248,113,113,.12);border-color:var(--red)}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+.hint{font-size:.82rem;color:var(--mut);text-align:center;margin-top:10px;font-weight:600}
+.msg{min-height:18px;font-size:.92rem;margin:8px 2px 0;font-weight:800}
+.msg.err{color:var(--red)}.msg.good{color:var(--lime)}
+.head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.head h2{margin:0}.head b{font-size:1.4rem;color:var(--lime)}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+li{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:14px;padding:11px 14px;font-weight:800;min-height:50px;animation:pop .35s ease both;transition:transform .15s}
+li.me{border-color:var(--lime);background:rgba(74,222,128,.18)}
+li.new{animation:flash 6s ease both}
+@keyframes flash{0%{transform:scale(.92);opacity:0;background:rgba(250,204,21,.6)}8%{transform:scale(1.03);opacity:1}100%{background:rgba(255,255,255,.08)}}
+li em{font-style:normal;color:#04180a;background:var(--lime);min-width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.82rem;font-weight:900;flex:none}
+li.w em{background:var(--yel)}
+li span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+li small{color:var(--lime);font-weight:900;letter-spacing:.5px}
+.empty{color:var(--mut);text-align:center;padding:14px;font-weight:600}
+details{margin-bottom:14px}
+summary{list-style:none;cursor:pointer;font-weight:900;font-size:1.1rem;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-radius:20px;min-height:56px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"＋";float:right;color:var(--lime)}
+details[open] summary:after{content:"－"}
+details[open] summary{border-radius:20px 20px 0 0}
+details .in2{background:var(--card);border:1px solid var(--line);border-top:0;border-radius:0 0 20px 20px;padding:12px 18px;animation:fadeup .3s ease}
+.hi{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-weight:700}
+.hi:last-child{border:0}
+.foot{text-align:center;margin-top:22px;font-weight:900}
+.foot small{display:block;color:var(--mut);font-weight:600;margin-top:4px}
+.foot a{color:#6fa583;font-size:.8rem;text-decoration:none;padding:14px;display:inline-block;cursor:pointer;font-weight:600}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:block;font-size:.82rem;color:var(--mut);margin:0 0 5px 2px;font-weight:700}
+.sec{font-weight:900;color:var(--lime);margin:14px 0 8px;font-size:.9rem}
+#toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));z-index:9;transform:translate(-50%,-140%);background:#050805;color:#fff;border:2px solid var(--lime);padding:12px 18px;border-radius:99px;font-weight:900;max-width:92vw;transition:transform .35s cubic-bezier(.2,1.2,.4,1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toast.show{transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.ball,.pt{display:none}}
+#goal{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.gscene{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top) + 9vh);display:flex;flex-direction:column;padding:0 5vw;animation:gout 4.9s linear both}
+@keyframes gout{0%,90%{opacity:1}100%{opacity:0}}
+.ggoal{align-self:flex-end;width:min(38vw,160px);position:relative;animation:gin .4s ease both;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.ggoal svg{display:block;width:100%;height:auto;overflow:visible}
+@keyframes gin{from{opacity:0;transform:translate3d(30px,0,0)}}
+.gnet{transform-box:fill-box;transform-origin:50% 0;animation:netshake .8s ease-in-out 1.3s both}
+@keyframes netshake{0%{transform:none}20%{transform:scale(1.1,1.06) skewX(-7deg)}45%{transform:scale(.95,.97) skewX(6deg)}70%{transform:scale(1.04,1.02) skewX(-3deg)}100%{transform:none}}
+.gfl{position:absolute;left:50%;top:60%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;border:4px solid var(--lime);opacity:0;animation:gfl .6s ease-out 1.3s both}
+@keyframes gfl{0%{transform:scale(.2);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+.gball{position:absolute;left:0;top:0;width:30px;height:30px;margin:-15px 0 0 -15px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.4));animation:kick 1.35s linear both;will-change:transform}
+.gball svg{display:block;width:100%;height:100%}
+@media(min-width:520px){.gball{width:38px;height:38px;margin:-19px 0 0 -19px}}
+@keyframes kick{
+0%{transform:translate3d(-50px,var(--sy,60vh),0) scale(.8) rotate(0);opacity:0;animation-timing-function:ease-out}
+6%{opacity:1}
+45%{transform:translate3d(calc(var(--gx,70vw)*.5),calc(var(--gy,20vh) - 50px),0) scale(1) rotate(420deg);animation-timing-function:ease-in}
+80%{transform:translate3d(calc(var(--gx,70vw)*.88),calc(var(--gy,20vh) - 6px),0) scale(.95) rotate(800deg);animation-timing-function:cubic-bezier(.5,0,1,.6)}
+100%{transform:translate3d(var(--gx,70vw),calc(var(--gy,20vh) + 8px),0) scale(.8) rotate(1000deg);opacity:1}}
+.gmsg{margin-top:10px;text-align:center;padding:0 10px;animation:gpop .5s cubic-bezier(.2,1.5,.4,1) 1.25s both}
+@keyframes gpop{from{opacity:0;transform:scale(.4)}}
+.gmsg b{display:block;font-size:clamp(1.6rem,8.5vw,2.6rem);font-weight:900;letter-spacing:-.5px;color:#fff;text-shadow:0 3px 0 #0b2a16,0 0 18px rgba(74,222,128,.7);line-height:1.05;overflow-wrap:anywhere}
+.gmsg span{display:inline-block;margin-top:8px;background:#050805;color:var(--lime);border:2px solid var(--lime);padding:6px 14px;border-radius:99px;font-weight:900;font-size:clamp(.9rem,4vw,1.15rem);overflow-wrap:anywhere;max-width:100%}
+@media(prefers-reduced-motion:reduce){.gball,.ggoal{display:none}.gscene{top:18vh}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+<div class="light"></div>
+<div class="field"><svg viewBox="0 0 400 1600" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="3">
+<g id="f"><rect x="14" y="14" width="372" height="772" rx="6"/><line x1="14" y1="400" x2="386" y2="400"/><circle cx="200" cy="400" r="62"/><rect x="95" y="14" width="210" height="95"/><rect x="145" y="14" width="110" height="38"/><rect x="95" y="691" width="210" height="95"/><rect x="145" y="748" width="110" height="38"/></g>
+<use href="#f" y="800"/></svg></div>
+<i class="ball" style="top:24%;font-size:64px;--d:46s;--dy:60px">⚽</i>
+<i class="ball" style="top:58%;font-size:44px;--d:34s;--dl:-12s;--dy:-50px">⚽</i>
+<i class="ball" style="top:80%;font-size:54px;--d:58s;--dl:-30s;--dy:30px">⚽</i>
+<i class="fl" style="top:12%;right:6%;font-size:46px">🏆</i>
+<i class="fl" style="top:70%;left:5%;font-size:44px;--d:11s">🥅</i>
+<i class="fl" style="top:44%;right:4%;font-size:40px;--d:13s">👟</i>
+</div>
+<div id="toast"></div>
+<div id="goal" aria-live="polite"></div>
+<div class="wrap">
+<header>
+  <h1><span class="hball">⚽</span> FUT dos <b>CRIA</b></h1>
+  <p class="sub">Nosso jogo. Nossa resenha. Nosso futebol.</p>
+</header>
+<div id="app"><div class="empty">Carregando…</div></div>
+<div class="foot">⚽ Feito para o nosso futebol.<small>Nosso jogo. Nossa resenha.</small><a id="sndLink">🔇 som</a><a id="admLink">⚙︎ admin</a></div>
+</div>
+
+<script>
+// ================== CONFIG ==================
+const SUPA_URL = "https://utoougnrgsnmeneemgtg.supabase.co/rest/v1";
+const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0b291Z25yZ3NubWVuZWVtZ3RnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMjEzMjcsImV4cCI6MjEwNjc5NzMyN30.aM0_6_6Grm8cDYVH4xfXkKzDdlqyNtIvr7If2X5dRiw";
+const ADMIN_PASSWORD = "1234"; // senha do admin
+const POLL_MS = 3000;
+// ============================================
+
+const H = {apikey:SUPA_KEY, Authorization:"Bearer "+SUPA_KEY, "Content-Type":"application/json"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => s.trim().replace(/\s+/g," ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+
+let device = localStorage.getItem("fdc_device");
+if(!device){device = (crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random());localStorage.setItem("fdc_device",device)}
+let isAdmin=false, adminOpen=false, match=null, players=[], hist=[], msg={t:"",c:""}, editing=false, known=null, fresh={}, lastSig="";
+
+// partículas leves
+for(let i=0;i<12;i++){const p=document.createElement("i");p.className="pt";p.style.cssText=`left:${Math.random()*100}%;--d:${12+Math.random()*12}s;--dl:${-Math.random()*20}s;--dx:${(Math.random()*60-30)|0}px`;document.querySelector(".bg").appendChild(p)}
+
+async function api(path, opt={}){
+  const r = await fetch(SUPA_URL+path,{headers:{...H,...(opt.prefer?{Prefer:opt.prefer}:{})},method:opt.method||"GET",body:opt.body?JSON.stringify(opt.body):undefined});
+  const txt = await r.text(); let data; try{data = txt?JSON.parse(txt):null}catch{data = txt}
+  if(!r.ok) throw {status:r.status,data};
+  return data;
+}
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),3200)}
+const G = () => ({vou:players.filter(p=>p.status==="vou"),talvez:players.filter(p=>p.status==="talvez"),nao:players.filter(p=>p.status==="nao"),espera:players.filter(p=>p.status==="espera")});
+
+async function load(){
+  try{
+    const m = await api("/matches?active=eq.true&order=id.desc&limit=1");
+    match = m[0]||null;
+    players = match ? await api(`/players?match_id=eq.${match.id}&order=created_at.asc,id.asc`) : [];
+    const vouNow = players.filter(p=>p.status==="vou");
+    if(known){ const nw=vouNow.filter(p=>!known.has(p.id)&&p.device_id!==device);
+      if(nw.length){ toast("🔥 Novo jogador confirmado!"); nw.forEach(p=>{fresh[p.id]=Date.now()+6000;goal(p.name)}); setTimeout(()=>{if(!editing)render()},6100) } }
+    known = new Set(vouNow.map(p=>p.id));
+    if(msg.c==="err"&&msg.t.startsWith("Sem conexão")) msg={t:"",c:""};
+  }catch(e){ msg = {t:"Sem conexão com o banco. Verifique o setup.",c:"err"}; lastSig="" }
+  const sig = JSON.stringify([match,players,msg,Object.keys(fresh).length]);
+  if(!editing && sig!==lastSig){ lastSig=sig; render(); }
+}
+async function loadHist(){
+  try{
+    const ms = await api("/matches?active=eq.false&order=id.desc&limit=8");
+    if(!ms.length){hist=[];return}
+    const ps = await api(`/players?select=match_id&status=eq.vou&match_id=in.(${ms.map(m=>m.id).join(",")})`);
+    hist = ms.map(m=>({date:m.date,n:ps.filter(p=>p.match_id===m.id).length}));
+  }catch{}
+}
+
+function fmtDate(d){ if(!d) return "A definir"; const [y,m,dd]=d.split("-"); return new Date(y,m-1,dd).toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long"}).replace(/^./,c=>c.toUpperCase()); }
+const fmtTime = t => t ? t.slice(0,5)+"h" : "A definir";
+const fmtShort = d => d ? d.split("-").reverse().slice(0,2).join("/") : "--/--";
+const link = () => location.href.split(/[?#]/)[0];
+
+const li = (p,i,cls="") => `<li class="${p.device_id===device?"me ":""}${fresh[p.id]>Date.now()?"new ":""}${cls}"><em>${i}</em><span>${esc(p.name)}</span>${p.device_id===device?"<small>VOCÊ</small>":""}</li>`;
+
+function render(){
+  const app=$("#app");
+  if(adminOpen && isAdmin){ app.innerHTML=adminHTML(); return; }
+  if(adminOpen){ app.innerHTML=loginHTML(); return; }
+  if(!match){ app.innerHTML=`<div class="card empty">Nenhuma partida marcada ainda.</div>`; return; }
+  const g=G(), n=g.vou.length, max=match.max_players, full=n>=max, pct=Math.min(100,Math.round(n/max*100));
+  const mine=players.find(p=>p.device_id===device), st=mine&&mine.status;
+  const keepName=$("#nome")?$("#nome").value:"";
+  const pos = mine&&st==="espera" ? g.espera.indexOf(mine)+1 : 0;
+  let action;
+  if(mine){
+    const box = st==="vou" ? `<div class="in"><b>🔥 Você está dentro!</b><span>Seu nome está confirmado para o jogo.</span></div>`
+      : st==="talvez" ? `<div class="in y"><b>🟡 Talvez</b><span>Você não ocupa vaga até confirmar.</span></div>`
+      : st==="nao" ? `<div class="in r"><b>🔴 Você não vai</b><span>Mudou de ideia? É só tocar em Vou jogar.</span></div>`
+      : `<div class="in y"><b>⏳ Lista de espera · #${pos}</b><span>O admin promove quando abrir vaga.</span></div>`;
+    action = `${box}<div class="seg">
+      <button class="${st==="vou"||st==="espera"?"on":""}" onclick="setStatus('vou')">${full&&st!=="vou"?"⏳ Espera":"🟢 Vou jogar"}</button>
+      <button class="${st==="talvez"?"on":""}" onclick="setStatus('talvez')">🟡 Talvez</button>
+      <button class="${st==="nao"?"on":""}" onclick="setStatus('nao')">🔴 Não vou</button></div>
+      <button class="danger" onclick="cancelar(${mine.id})">Cancelar presença</button>`;
+  } else if(!match.open){
+    action = `<div class="in y"><b>🔒 Confirmações encerradas</b></div>`;
+  } else {
+    action = `<h2>Você vai jogar?</h2>
+      <input id="nome" placeholder="Digite seu nome" maxlength="30" autocomplete="off" value="${esc(keepName)}">
+      <button id="btnC" onclick="confirmar('vou')">${full?"⏳ ENTRAR NA LISTA DE ESPERA":"⚽ CONFIRMAR PRESENÇA"}</button>
+      <div class="two"><button class="ghost" onclick="confirmar('talvez')">🟡 Talvez</button><button class="ghost" onclick="confirmar('nao')">🔴 Não vou</button></div>
+      <div class="hint">Só quem está 🟢 Vou jogar ocupa vaga.</div>`;
+  }
+  app.innerHTML=`
+  <div class="card hero"><div class="tag">⚽ Próximo jogo</div>
+    <div class="info"><div><span>📅</span>${esc(fmtDate(match.date))}</div><div><span>⏰</span>${esc(fmtTime(match.time))}</div><div><span>📍</span>${esc(match.location||"A definir")}</div></div>
+    <div class="cnt"><span><b>${n} / ${max}</b> confirmados</span><span>${pct}%</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    ${!match.open?`<div class="badge">🔒 Confirmações encerradas</div>`:full?`<div class="badge">🔥 JOGO LOTADO — entre na lista de espera</div>`:""}
+  </div>
+  <div class="card">${action}<div class="msg ${msg.c}">${esc(msg.t)}</div></div>
+  <div class="two" style="margin:-4px 0 14px"><button onclick="share()">📲 COMPARTILHAR JOGO</button><button class="ghost" onclick="wa()">💬 WhatsApp</button></div>
+  <div class="card"><div class="head"><h2>⚽ CONFIRMADOS</h2><b>${n} / ${max}</b></div>
+    ${n?`<ol>${g.vou.map((p,i)=>li(p,i+1)).join("")}</ol>`:`<div class="empty">Ninguém confirmou ainda. Seja o primeiro! 🔥</div>`}</div>
+  ${g.talvez.length?`<div class="card"><div class="head"><h2>🟡 TALVEZ</h2><b>${g.talvez.length}</b></div><ol>${g.talvez.map((p,i)=>li(p,"?")).join("")}</ol></div>`:""}
+  ${g.espera.length?`<div class="card"><div class="head"><h2>⏳ LISTA DE ESPERA</h2><b>${g.espera.length}</b></div><ol>${g.espera.map((p,i)=>li(p,max+i+1,"w")).join("")}</ol></div>`:""}
+  ${hist.length?`<details><summary>📅 HISTÓRICO</summary><div class="in2">${hist.map(h=>`<div class="hi"><span>${fmtShort(h.date)}</span><span>${h.n} jogadores</span></div>`).join("")}</div></details>`:""}`;
+  const inp=$("#nome"); if(inp){ inp.addEventListener("keydown",e=>{if(e.key==="Enter")confirmar("vou")}); if(keepName) inp.focus() }
+}
+
+async function insertPlayer(name,status){
+  return api("/players",{method:"POST",body:{match_id:match.id,name,name_key:norm(name),device_id:device,status}});
+}
+async function confirmar(status){
+  const name=$("#nome").value.trim().replace(/\s+/g," ");
+  if(name.length<2){ msg={t:"Digite seu nome.",c:"err"}; return render(); }
+  if(players.some(p=>p.name_key===norm(name))){ msg={t:"Esse nome já está confirmado.",c:"err"}; return render(); }
+  if(status==="vou" && G().vou.length>=match.max_players) status="espera";
+  document.querySelectorAll("#app button").forEach(b=>b.disabled=true);
+  try{
+    try{ await insertPlayer(name,status) }
+    catch(e){ if(status==="vou"&&JSON.stringify(e.data||"").includes("LOTADO")){status="espera";await insertPlayer(name,status)} else throw e }
+    msg={t:"",c:""}; if(status==="vou") goal(name); else toast(status==="espera"?"⏳ Você entrou na lista de espera":status==="talvez"?"🟡 Marcado como talvez":"🔴 Marcado como não vou");
+  }catch(e){
+    const s=JSON.stringify(e.data||"");
+    msg = e.status===409 ? {t:"Esse nome já está confirmado.",c:"err"} : s.includes("FECHADO") ? {t:"Confirmações encerradas.",c:"err"} : {t:"Erro ao confirmar. Tente de novo.",c:"err"};
+  }
+  await load(); lastSig=""; render();
+}
+async function setStatus(s){
+  const mine=players.find(p=>p.device_id===device); if(!mine||mine.status===s) return;
+  if(s==="vou" && G().vou.length>=match.max_players) s="espera";
+  try{ await api(`/players?id=eq.${mine.id}&device_id=eq.${encodeURIComponent(device)}`,{method:"PATCH",body:{status:s}}); msg={t:"",c:""}; if(s==="vou") goal(mine.name); else toast(s==="espera"?"⏳ Lista de espera":s==="talvez"?"🟡 Talvez":"🔴 Não vou") }
+  catch(e){ msg=JSON.stringify(e.data||"").includes("FECHADO")?{t:"Confirmações encerradas.",c:"err"}:{t:"Não foi possível alterar. Tente de novo.",c:"err"} }
+  await load(); lastSig=""; render();
+}
+async function cancelar(id){
+  try{ await api(`/players?id=eq.${id}&device_id=eq.${encodeURIComponent(device)}`,{method:"DELETE"}); msg={t:"Presença cancelada.",c:"good"} }
+  catch{ msg={t:"Erro ao cancelar.",c:"err"} }
+  await load(); lastSig=""; render();
+}
+
+/* ---------- COMPARTILHAR ---------- */
+function shareText(){ return `⚽ FUT DOS CRIA\n\n📅 ${fmtDate(match.date)}\n⏰ ${fmtTime(match.time)}\n📍 ${match.location||"A definir"}\n\n👥 ${G().vou.length}/${match.max_players} confirmados\n\nConfirme sua presença:\n${link()}` }
+function share(){ if(navigator.share){ navigator.share({text:shareText()}).catch(()=>{}) } else wa() }
+function wa(){ window.open("https://wa.me/?text="+encodeURIComponent(shareText()),"_blank") }
+function copyLink(){ (navigator.clipboard?navigator.clipboard.writeText(link()):Promise.reject()).then(()=>toast("🔗 Link copiado!")).catch(()=>prompt("Copie o link:",link())) }
+
+/* ---------- ADMIN ---------- */
+$("#admLink").onclick=()=>{adminOpen=!adminOpen; editing=adminOpen; render(); if(!adminOpen){editing=false;lastSig="";load()}};
+function loginHTML(){return `<div class="card"><h2>🔐 Área do admin</h2>
+  <input id="pw" type="password" placeholder="Senha"><button onclick="login()">Entrar</button>
+  <div class="msg err">${esc(msg.t)}</div>
+  <button class="ghost" style="margin-top:8px" onclick="sair()">Voltar</button></div>`}
+function login(){ if($("#pw").value===ADMIN_PASSWORD){isAdmin=true;msg={t:"",c:""};render()} else {msg={t:"Senha incorreta.",c:"err"};render()} }
+function sair(){adminOpen=false;editing=false;msg={t:"",c:""};lastSig="";load()}
+function admList(title,arr,promote){
+  return `<div class="sec">${title} (${arr.length})</div>`+(arr.length?`<ol>${arr.map((p,i)=>`<li><em>${i+1}</em><span>${esc(p.name)}</span>${promote?`<button class="sm" onclick="promover(${p.id})">Promover</button>`:""}<button class="danger sm" onclick="remover(${p.id})">✕</button></li>`).join("")}</ol>`:`<div class="empty" style="padding:6px">—</div>`);
+}
+function adminHTML(){
+  const m=match||{}, g=G();
+  return `<div class="card"><div class="tag">Admin · jogo atual</div>
+  ${match?`<div class="row"><div><label>Data</label><input id="aD" type="date" value="${m.date||""}"></div>
+  <div><label>Horário</label><input id="aT" type="time" value="${(m.time||"").slice(0,5)}"></div></div>
+  <label>Local</label><input id="aL" value="${esc(m.location||"")}">
+  <label>Limite de jogadores</label><input id="aM" type="number" min="1" value="${m.max_players||20}">
+  <button onclick="salvar()">Salvar alterações</button>
+  <div class="two"><button class="ghost" onclick="toggleOpen()">${m.open?"🔒 Fechar":"🔓 Abrir"} confirmações</button><button class="ghost" onclick="copyLink()">🔗 Copiar link</button></div>
+  <div class="msg ${msg.c}">${esc(msg.t)}</div>`:`<div class="empty">Sem partida ativa. Crie uma abaixo.</div>`}</div>
+
+  <div class="card"><div class="tag">Jogadores</div>
+  ${admList("🟢 Vou jogar",g.vou)}${admList("⏳ Lista de espera",g.espera,true)}${admList("🟡 Talvez",g.talvez)}${admList("🔴 Não vou",g.nao)}</div>
+
+  <div class="card"><div class="tag">Nova partida</div>
+  <div class="row"><div><label>Data</label><input id="nD" type="date"></div><div><label>Horário</label><input id="nT" type="time" value="20:00"></div></div>
+  <label>Local</label><input id="nL" value="${esc(m.location||"")}">
+  <label>Limite de jogadores</label><input id="nM" type="number" min="1" value="${m.max_players||20}">
+  <button onclick="novaPartida()">⚽ Iniciar nova partida</button>
+  <p class="hint">A lista atual é arquivada e uma lista limpa começa.</p></div>
+  <button class="ghost" onclick="sair()">← Voltar ao jogo</button>`;
+}
+async function salvar(){
+  try{ await api(`/matches?id=eq.${match.id}`,{method:"PATCH",body:{date:$("#aD").value||null,time:$("#aT").value||null,location:$("#aL").value.trim(),max_players:+$("#aM").value||20}}); msg={t:"Salvo ✔",c:"good"} }catch{ msg={t:"Erro ao salvar.",c:"err"} }
+  await load(); render();
+}
+async function toggleOpen(){ await api(`/matches?id=eq.${match.id}`,{method:"PATCH",body:{open:!match.open}}); await load(); render(); }
+async function remover(id){ if(!confirm("Remover este jogador?"))return; await api(`/players?id=eq.${id}`,{method:"DELETE"}); await load(); render(); }
+async function promover(id){
+  try{ await api(`/players?id=eq.${id}`,{method:"PATCH",body:{status:"vou"}}); msg={t:"Jogador promovido ✔",c:"good"} }
+  catch(e){ msg={t:JSON.stringify(e.data||"").includes("LOTADO")?"Sem vaga: aumente o limite ou remova alguém.":"Erro ao promover.",c:"err"} }
+  await load(); render();
+}
+async function novaPartida(){
+  if(!confirm("Iniciar nova partida? A lista atual será arquivada."))return;
+  try{
+    await api("/matches?active=eq.true",{method:"PATCH",body:{active:false}});
+    await api("/matches",{method:"POST",body:{date:$("#nD").value||null,time:$("#nT").value||null,location:$("#nL").value.trim(),max_players:+$("#nM").value||20,open:true,active:true}});
+    msg={t:"Nova partida criada ✔",c:"good"}; known=null; fresh={}; await loadHist();
+  }catch{ msg={t:"Erro ao criar partida.",c:"err"} }
+  await load(); render();
+}
+
+/* ---------- GOL! ---------- */
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+let gq=[], gBusy=false, soundOn=localStorage.getItem("fdc_som")==="1", actx=null;
+const NET=(()=>{let t="";for(let x=26;x<=134;x+=12)t+=`<line x1="${x}" y1="18" x2="${x}" y2="102"/>`;for(let y=30;y<=90;y+=12)t+=`<line x1="14" y1="${y}" x2="146" y2="${y}"/>`;return t})();
+const BALL=`<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#fff" stroke="#111" stroke-width="2.5"/><polygon points="20,11 28,17 25,27 15,27 12,17" fill="#111"/><path d="M20 11V2M28 17l9-3M25 27l6 8M15 27l-6 8M12 17l-9-3" stroke="#111" stroke-width="2" fill="none"/></svg>`;
+function goalHTML(name){
+  const N=esc(name.toUpperCase());
+  const v=[["⚽ GOOOOOOL!",`${N} CONFIRMOU!`],["⚽ GOOOOOOL!",`${N} TÁ DENTRO!`],["🔥 É GOL!",`${N} CONFIRMOU!`],["⚽ MAIS UM PRA CONTA!",`${N} CONFIRMOU!`],[`🥅 GOOOOOOL DO ${N}!`,"CONFIRMOU PRESENÇA!"],[`🔥 ${N} TÁ DENTRO!`,"⚽ GOOOOOOL!"]];
+  const [a,b]=v[Math.random()*v.length|0];
+  return `<div class="gscene"><div class="ggoal"><svg viewBox="0 0 160 112"><g class="gnet" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.5)" stroke-width="1.5"><rect x="14" y="18" width="132" height="84"/>${NET}</g><path d="M10 106V14H150V106" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg><i class="gfl"></i></div><div class="gmsg"><b>${a}</b><span>${b}</span></div></div><div class="gball">${BALL}</div>`;
+}
+function goal(name){ if(gq.length<3) gq.push(name); if(!gBusy) nextGoal() }
+function nextGoal(){
+  const name=gq.shift(), el=$("#goal");
+  if(!name){ gBusy=false; return }
+  gBusy=true; el.innerHTML=goalHTML(name);
+  if(!reduce){
+    const r=el.querySelector(".ggoal").getBoundingClientRect(), b=el.querySelector(".gball");
+    b.style.setProperty("--gx",(r.left+r.width/2)+"px"); b.style.setProperty("--gy",(r.top+r.height*.6)+"px"); b.style.setProperty("--sy",(innerHeight*.62)+"px");
+    setTimeout(playGol,1250);
+  } else playGol();
+  setTimeout(()=>{ el.innerHTML=""; nextGoal() }, reduce?2400:4900);
+}
+/* som opcional: só toca se a pessoa ligou em "som" */
+const sndLabel=()=>{$("#sndLink").textContent=soundOn?"🔊 som":"🔇 som"};
+function unlock(){ try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==="suspended") actx.resume() }catch{} }
+$("#sndLink").onclick=()=>{ soundOn=!soundOn; localStorage.setItem("fdc_som",soundOn?"1":"0"); sndLabel(); if(soundOn){ unlock(); setTimeout(playGol,100) } };
+addEventListener("pointerdown",()=>{ if(soundOn) unlock() },{passive:true});
+function playGol(){
+  if(!soundOn||!actx||actx.state!=="running") return;
+  try{
+    const t=actx.currentTime, len=actx.sampleRate*1.6, buf=actx.createBuffer(1,len,actx.sampleRate), d=buf.getChannelData(0);
+    for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+    const src=actx.createBufferSource(); src.buffer=buf;
+    const f=actx.createBiquadFilter(); f.type="bandpass"; f.frequency.value=900; f.Q.value=.7;
+    const g=actx.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.22,t+.35); g.gain.linearRampToValueAtTime(0,t+1.6);
+    src.connect(f); f.connect(g); g.connect(actx.destination); src.start(t);
+    const o=actx.createOscillator(), og=actx.createGain(); o.type="square";
+    o.frequency.setValueAtTime(520,t+.05); o.frequency.linearRampToValueAtTime(700,t+.4);
+    og.gain.setValueAtTime(.05,t+.05); og.gain.linearRampToValueAtTime(0,t+.5);
+    o.connect(og); og.connect(actx.destination); o.start(t+.05); o.stop(t+.55);
+  }catch{}
+}
+sndLabel();
+
+loadHist().then(load); setInterval(()=>{ if(!document.hidden) load() },POLL_MS);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
+</script>
+</body>
+</html>
