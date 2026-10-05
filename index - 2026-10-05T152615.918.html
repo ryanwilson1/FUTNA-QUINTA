@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0f0b">
+<title>FUT dos Cria</title>
+<style>
+:root{--g:#16a34a;--g2:#15803d;--gl:#dcfce7;--bg:#f2f8f3;--card:#ffffff;--soft:#f5faf6;--line:#dbe8de;--tx:#102315;--mut:#5d7664;--red:#dc2626}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:520px;margin:0 auto;padding:0 14px calc(50px + env(safe-area-inset-bottom))}
+header{margin:0 -14px 16px;padding:calc(26px + env(safe-area-inset-top)) 18px 54px;text-align:center;color:#fff;position:relative;overflow:hidden;
+background:linear-gradient(160deg,#22c55e 0,#15803d 70%,#0f5f2c 100%);border-radius:0 0 28px 28px}
+header:before{content:"";position:absolute;left:50%;top:50%;width:170px;height:170px;transform:translate(-50%,-50%);border:3px solid rgba(255,255,255,.22);border-radius:50%}
+header:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:3px solid rgba(255,255,255,.22)}
+header>*{position:relative;z-index:1}
+h1{margin:0;font-size:2.1rem;font-weight:900;letter-spacing:-.5px;text-transform:uppercase;text-shadow:0 2px 0 rgba(0,0,0,.18)}
+h1 b{color:#fff;background:#0b0f0c;padding:0 9px;border-radius:9px;margin-left:3px}
+.sub{color:rgba(255,255,255,.92);margin:8px 0 0;font-size:1rem;font-weight:500}
+#app{margin-top:-38px;position:relative;z-index:2}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 4px 14px rgba(21,128,61,.08)}
+.tag{font-size:.75rem;font-weight:800;letter-spacing:1.4px;color:var(--g);text-transform:uppercase;margin-bottom:12px}
+.info{display:grid;gap:10px}
+.info div{display:flex;gap:12px;align-items:center;font-size:1.08rem;font-weight:700}
+.info span{width:38px;height:38px;display:grid;place-items:center;background:var(--gl);border-radius:11px;font-size:1.15rem;flex:none}
+h2{font-size:1.25rem;margin:0 0 14px;font-weight:800}
+input,select{width:100%;padding:16px;border-radius:14px;border:2px solid var(--line);background:var(--soft);color:var(--tx);font-size:16px;margin-bottom:12px;outline:none;-webkit-appearance:none;appearance:none;min-height:54px}
+input:focus{border-color:var(--g);background:#fff}
+button{width:100%;min-height:56px;padding:16px;border:0;border-radius:14px;font-size:1.05rem;font-weight:800;cursor:pointer;color:#fff;background:var(--g);letter-spacing:.3px;box-shadow:0 3px 0 var(--g2)}
+button:active{transform:translateY(2px);box-shadow:none}
+button:disabled{opacity:.5}
+button.ghost{background:#fff;color:var(--tx);border:2px solid var(--line);box-shadow:none}
+button.danger{background:#fff;color:var(--red);border:2px solid #fecaca;box-shadow:none}
+button.sm{width:auto;min-height:40px;padding:8px 13px;font-size:.85rem}
+.ok{background:var(--gl);border:2px solid #86efac;border-radius:14px;padding:16px;text-align:center;font-weight:800;margin-bottom:12px;color:var(--g2);font-size:1.1rem}
+.msg{min-height:20px;font-size:.92rem;margin:8px 2px 0;font-weight:700}
+.msg.err{color:var(--red)}.msg.good{color:var(--g2)}
+.full{background:#fef3c7;border:2px solid #fcd34d;color:#92400e;border-radius:14px;padding:16px;text-align:center;font-weight:800}
+.bar{height:12px;background:#e5efe7;border-radius:99px;overflow:hidden;margin:10px 0 16px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#4ade80,var(--g));border-radius:99px;transition:width .4s}
+.count{display:flex;justify-content:space-between;align-items:baseline;color:var(--mut);font-size:.9rem;font-weight:600}
+.count b{color:var(--tx);font-size:1.35rem}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+li{display:flex;align-items:center;gap:12px;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-weight:700;min-height:52px}
+li.me{border-color:var(--g);background:var(--gl)}
+li em{font-style:normal;color:#fff;background:var(--g);font-weight:900;min-width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.85rem}
+li span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty{color:var(--mut);text-align:center;padding:16px;font-weight:600}
+.adm{text-align:center;margin-top:20px}
+.adm a{color:#9ab3a0;font-size:.8rem;text-decoration:none;padding:14px;display:inline-block;cursor:pointer}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:block;font-size:.82rem;color:var(--mut);margin:0 0 5px 2px;font-weight:700}
+.hide{display:none}
+
+body{background:repeating-linear-gradient(90deg,#e4f2e7 0 56px,#f0f8f2 56px 112px)}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg svg{position:absolute;inset:0;width:100%;height:100%}
+.bg i{position:absolute;font-style:normal;opacity:.22;filter:saturate(.7)}
+.wrap{position:relative;z-index:1}
+.credit{color:var(--g2);font-weight:800;font-size:.9rem;letter-spacing:.2px;padding:10px 0 0}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+<svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#16a34a" stroke-opacity=".28" stroke-width="3">
+<rect x="14" y="14" width="372" height="772" rx="6"/>
+<line x1="14" y1="400" x2="386" y2="400"/>
+<circle cx="200" cy="400" r="62"/><circle cx="200" cy="400" r="4" fill="#16a34a"/>
+<rect x="95" y="14" width="210" height="95"/><rect x="145" y="14" width="110" height="38"/>
+<rect x="95" y="691" width="210" height="95"/><rect x="145" y="748" width="110" height="38"/>
+<path d="M150 109a50 50 0 0 0 100 0M150 691a50 50 0 0 1 100 0"/>
+</svg>
+<i style="top:22%;left:-18px;font-size:88px;transform:rotate(-18deg)">⚽</i>
+<i style="top:46%;right:-22px;font-size:110px;transform:rotate(24deg)">⚽</i>
+<i style="bottom:12%;left:6%;font-size:70px;transform:rotate(12deg)">⚽</i>
+<i style="top:68%;right:10%;font-size:56px;transform:rotate(-10deg)">🥅</i>
+<i style="top:8%;right:6%;font-size:52px;transform:rotate(14deg)">🏆</i>
+</div>
+<div class="wrap">
+<header>
+  <h1>FUT dos <b>Cria</b></h1>
+  <p class="sub">Confirme sua presença no próximo jogo</p>
+</header>
+
+<div id="app"><div class="empty">Carregando…</div></div>
+
+<div class="adm"><div class="credit">⚽ Criado para o fut de quinta, seus gays! ⚽</div><a id="admLink">⚙︎ admin</a></div>
+</div>
+
+<script>
+// ================== CONFIG ==================
+const SUPA_URL = "https://utoougnrgsnmeneemgtg.supabase.co/rest/v1";
+const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0b291Z25yZ3NubWVuZWVtZ3RnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyMjEzMjcsImV4cCI6MjEwNjc5NzMyN30.aM0_6_6Grm8cDYVH4xfXkKzDdlqyNtIvr7If2X5dRiw";
+const ADMIN_PASSWORD = "1234"; // senha do admin
+const POLL_MS = 3000;
+// ============================================
+
+const H = {apikey:SUPA_KEY, Authorization:"Bearer "+SUPA_KEY, "Content-Type":"application/json"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => s.trim().replace(/\s+/g," ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+
+let device = localStorage.getItem("fdc_device");
+if(!device){device = (crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random());localStorage.setItem("fdc_device",device)}
+let isAdmin = false, adminOpen = false, match = null, players = [], msg = {t:"",c:""}, editing = false;
+
+async function api(path, opt={}){
+  const r = await fetch(SUPA_URL+path,{headers:{...H,...(opt.prefer?{Prefer:opt.prefer}:{})},method:opt.method||"GET",body:opt.body?JSON.stringify(opt.body):undefined});
+  const txt = await r.text();
+  let data; try{data = txt?JSON.parse(txt):null}catch{data = txt}
+  if(!r.ok) throw {status:r.status,data};
+  return data;
+}
+
+async function load(){
+  try{
+    const m = await api("/matches?active=eq.true&order=id.desc&limit=1");
+    match = m[0]||null;
+    players = match ? await api(`/players?match_id=eq.${match.id}&order=created_at.asc,id.asc`) : [];
+  }catch(e){ msg = {t:"Sem conexão com o banco. Verifique o setup.",c:"err"} }
+  if(!editing) render();
+}
+
+function fmtDate(d){ if(!d) return "A definir"; const [y,m,dd]=d.split("-"); const dt=new Date(y,m-1,dd);
+  return dt.toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long"}).replace(/^./,c=>c.toUpperCase()); }
+const fmtTime = t => t ? t.slice(0,5)+"h" : "A definir";
+
+function render(){
+  const app = $("#app");
+  if(adminOpen && isAdmin){ app.innerHTML = adminHTML(); return; }
+  if(adminOpen && !isAdmin){ app.innerHTML = loginHTML(); return; }
+  if(!match){ app.innerHTML = `<div class="card empty">Nenhuma partida marcada ainda.</div>`; return; }
+  const mine = players.find(p=>p.device_id===device);
+  const n = players.length, max = match.max_players, full = n>=max;
+  const pct = Math.min(100,Math.round(n/max*100));
+  const keepName = $("#nome") ? $("#nome").value : "";
+  app.innerHTML = `
+  <div class="card"><div class="tag">Próximo jogo</div>
+    <div class="info">
+      <div><span>📅</span>${esc(fmtDate(match.date))}</div>
+      <div><span>⏰</span>${esc(fmtTime(match.time))}</div>
+      <div><span>📍</span>${esc(match.location||"A definir")}</div>
+    </div></div>
+
+  <div class="card">
+    ${mine ? `<div class="ok">✅ Você está confirmado!</div>
+      <button class="danger" onclick="cancelar(${mine.id})">Cancelar presença</button>`
+    : !match.open ? `<div class="full">🔒 Confirmações encerradas</div>`
+    : full ? `<div class="full">⚠️ Jogo lotado</div>`
+    : `<h2>Você vai jogar?</h2>
+      <input id="nome" placeholder="Digite seu nome" maxlength="30" autocomplete="off" value="${esc(keepName)}">
+      <button id="btnC" onclick="confirmar()">⚽ CONFIRMAR PRESENÇA</button>`}
+    <div class="msg ${msg.c}">${esc(msg.t)}</div>
+  </div>
+
+  <div class="card">
+    <h2>⚽ Confirmados</h2>
+    <div class="count"><span><b>${n}</b> jogador${n===1?"":"es"} confirmado${n===1?"":"s"}</span><span>${n} / ${max} jogadores</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    ${n? `<ol>${players.map((p,i)=>`<li class="${p.device_id===device?"me":""}"><em>${i+1}</em><span>${esc(p.name)}</span>${p.device_id===device?"<small style='color:var(--g2);font-weight:800'>você</small>":""}</li>`).join("")}</ol>`
+        : `<div class="empty">Ninguém confirmou ainda. Seja o primeiro! 🔥</div>`}
+  </div>`;
+  const inp=$("#nome"); if(inp){ inp.addEventListener("keydown",e=>{if(e.key==="Enter")confirmar()}); if(keepName) inp.focus() }
+}
+
+async function confirmar(){
+  const inp=$("#nome"); const name=inp.value.trim().replace(/\s+/g," ");
+  if(name.length<2){ msg={t:"Digite seu nome.",c:"err"}; return render(); }
+  if(players.some(p=>p.name_key===norm(name))){ msg={t:"Esse nome já está confirmado.",c:"err"}; return render(); }
+  $("#btnC").disabled=true;
+  try{
+    await api("/players",{method:"POST",body:{match_id:match.id,name,name_key:norm(name),device_id:device}});
+    msg={t:"",c:""};
+  }catch(e){
+    const s=JSON.stringify(e.data||"");
+    msg = e.status===409 ? {t:"Esse nome já está confirmado.",c:"err"}
+        : s.includes("LOTADO") ? {t:"⚠️ Jogo lotado",c:"err"}
+        : s.includes("FECHADO") ? {t:"Confirmações encerradas.",c:"err"}
+        : {t:"Erro ao confirmar. Tente de novo.",c:"err"};
+  }
+  await load();
+}
+
+async function cancelar(id){
+  try{ await api(`/players?id=eq.${id}&device_id=eq.${encodeURIComponent(device)}`,{method:"DELETE"}); msg={t:"Presença cancelada.",c:"good"} }
+  catch{ msg={t:"Erro ao cancelar.",c:"err"} }
+  await load();
+}
+
+/* ---------- ADMIN ---------- */
+$("#admLink").onclick=()=>{adminOpen=!adminOpen; editing=adminOpen; render(); if(!adminOpen){editing=false;load()}};
+function loginHTML(){return `<div class="card"><h2>🔐 Área do admin</h2>
+  <input id="pw" type="password" placeholder="Senha"><button onclick="login()">Entrar</button>
+  <div class="msg err">${esc(msg.t)}</div>
+  <button class="ghost" style="margin-top:8px" onclick="sair()">Voltar</button></div>`}
+function login(){ if($("#pw").value===ADMIN_PASSWORD){isAdmin=true;msg={t:"",c:""};render()} else {msg={t:"Senha incorreta.",c:"err"};render()} }
+function sair(){adminOpen=false;editing=false;msg={t:"",c:""};load()}
+function adminHTML(){
+  const m=match||{};
+  return `<div class="card"><div class="tag">Admin · jogo atual</div>
+  ${match?`<div class="row"><div><label>Data</label><input id="aD" type="date" value="${m.date||""}"></div>
+  <div><label>Horário</label><input id="aT" type="time" value="${(m.time||"").slice(0,5)}"></div></div>
+  <label>Local</label><input id="aL" value="${esc(m.location||"")}">
+  <label>Limite de jogadores</label><input id="aM" type="number" min="1" value="${m.max_players||20}">
+  <button onclick="salvar()">Salvar alterações</button>
+  <button class="ghost" style="margin-top:8px" onclick="toggleOpen()">${m.open?"🔒 Fechar confirmações":"🔓 Abrir confirmações"}</button>
+  <div class="msg ${msg.c}">${esc(msg.t)}</div>`:`<div class="empty">Sem partida ativa. Crie uma abaixo.</div>`}</div>
+
+  <div class="card"><div class="tag">Confirmados (${players.length})</div>
+  ${players.length?`<ol>${players.map((p,i)=>`<li><em>${i+1}</em><span>${esc(p.name)}</span><button class="danger sm" onclick="remover(${p.id})">Remover</button></li>`).join("")}</ol>`:`<div class="empty">Lista vazia.</div>`}
+  </div>
+
+  <div class="card"><div class="tag">Nova partida</div>
+  <div class="row"><div><label>Data</label><input id="nD" type="date"></div><div><label>Horário</label><input id="nT" type="time" value="20:00"></div></div>
+  <label>Local</label><input id="nL" value="${esc(m.location||"")}">
+  <label>Limite de jogadores</label><input id="nM" type="number" min="1" value="${m.max_players||20}">
+  <button onclick="novaPartida()">⚽ Iniciar nova partida</button>
+  <p class="sub" style="font-size:.8rem;margin-top:8px">A lista atual é arquivada e uma lista limpa começa.</p></div>
+  <button class="ghost" onclick="sair()">← Voltar ao jogo</button>`;
+}
+async function salvar(){
+  try{ await api(`/matches?id=eq.${match.id}`,{method:"PATCH",body:{date:$("#aD").value||null,time:$("#aT").value||null,location:$("#aL").value.trim(),max_players:+$("#aM").value||20}});
+    msg={t:"Salvo ✔",c:"good"} }catch{ msg={t:"Erro ao salvar.",c:"err"} }
+  await load(); render();
+}
+async function toggleOpen(){ await api(`/matches?id=eq.${match.id}`,{method:"PATCH",body:{open:!match.open}}); await load(); render(); }
+async function remover(id){ if(!confirm("Remover este jogador?"))return; await api(`/players?id=eq.${id}`,{method:"DELETE"}); await load(); render(); }
+async function novaPartida(){
+  if(!confirm("Iniciar nova partida? A lista atual será arquivada."))return;
+  try{
+    await api("/matches?active=eq.true",{method:"PATCH",body:{active:false}});
+    await api("/matches",{method:"POST",body:{date:$("#nD").value||null,time:$("#nT").value||null,location:$("#nL").value.trim(),max_players:+$("#nM").value||20,open:true,active:true}});
+    msg={t:"Nova partida criada ✔",c:"good"};
+  }catch{ msg={t:"Erro ao criar partida.",c:"err"} }
+  await load(); render();
+}
+
+load(); setInterval(()=>{ if(!document.hidden) load() },POLL_MS);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});
+</script>
+</body>
+</html>
