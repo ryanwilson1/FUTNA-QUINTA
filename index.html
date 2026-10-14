@@ -273,6 +273,13 @@ details .in2{border-radius:0 0 var(--r3) var(--r3);background:#0b1e13}
 #app:has(>.tabs)>:not(.tabs){grid-column:2;margin:0;max-width:780px}
 body[data-tab="inicio"] #app:has(>.tabs){grid-template-columns:200px repeat(2,minmax(0,1fr))}
 body[data-tab="inicio"] #app:has(>.tabs)>:not(.tabs){grid-column:auto;max-width:none}}
+
+.pres-top,.lists,.tm-grid{display:grid;gap:16px;margin-bottom:16px}.pres-top>.card,.lists>.card,.tm-grid>.card,.pres-top>.two{margin:0}
+.tr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:12px 0;border-top:1px solid var(--line)}.tr:first-of-type{border-top:0}.tr b{flex:1 1 140px;min-width:0;overflow-wrap:anywhere}.tr .wx-s{flex:1 1 100%;order:3}.tr button{order:4}
+.vs{padding:6px 0}.vs b{font-size:1.1rem;letter-spacing:2px}
+@media(min-width:760px){.lists,.tm-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.tr .wx-s{flex:1 1 auto;order:0}}
+@media(min-width:1000px){.pres-top{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.pres-top>.two{grid-column:1/-1}
+#app:has(>.tabs)>:is(.pres-top,.lists,.tm-grid){max-width:none}.lists,.tm-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -379,38 +386,38 @@ function render(){
   const pos = mine&&st==="espera" ? g.espera.indexOf(mine)+1 : 0;
   let action;
   if(mine){
-    const box = st==="vou" ? `<div class="in"><b>🔥 Você está dentro!</b><span>Seu nome está confirmado para o jogo.</span></div>`
-      : st==="talvez" ? `<div class="in y"><b>🟡 Talvez</b><span>Você não ocupa vaga até confirmar.</span></div>`
-      : st==="nao" ? `<div class="in r"><b>🔴 Você não vai</b><span>Mudou de ideia? É só tocar em Vou jogar.</span></div>`
-      : `<div class="in y"><b>⏳ Lista de espera · #${pos}</b><span>O admin promove quando abrir vaga.</span></div>`;
+    const box = st==="vou" ? `<div class="in"><b>Você está dentro</b><span>Seu nome está confirmado para o jogo.</span></div>`
+      : st==="talvez" ? `<div class="in y"><b>Talvez</b><span>Você não ocupa vaga até confirmar.</span></div>`
+      : st==="nao" ? `<div class="in r"><b>Você não vai</b><span>Mudou de ideia? É só tocar em Vou jogar.</span></div>`
+      : `<div class="in y"><b>Lista de espera · #${pos}</b><span>O admin promove quando abrir vaga.</span></div>`;
     action = `${box}<div class="seg">
-      <button class="${st==="vou"||st==="espera"?"on":""}" onclick="setStatus('vou')">${full&&st!=="vou"?"⏳ Espera":"🟢 Vou jogar"}</button>
+      <button class="${st==="vou"||st==="espera"?"on":""}" onclick="setStatus('vou')">${full&&st!=="vou"?"Espera":"Vou jogar"}</button>
       <button class="${st==="talvez"?"on":""}" onclick="setStatus('talvez')">Talvez</button>
       <button class="${st==="nao"?"on":""}" onclick="setStatus('nao')">Não vou</button></div>
       <button class="danger" onclick="cancelar(${mine.id})">Cancelar presença</button>`;
   } else if(!match.open){
-    action = `<div class="in y"><b>🔒 Confirmações encerradas</b></div>`;
+    action = `<div class="in y"><b>Confirmações encerradas</b></div>`;
   } else {
     action = `<h2>Você vai jogar?</h2>
       <input id="nome" placeholder="Digite seu nome" maxlength="30" autocomplete="off" value="${esc(keepName)}">
-      <button id="btnC" onclick="confirmar('vou')">${full?"⏳ ENTRAR NA LISTA DE ESPERA":"⚽ CONFIRMAR PRESENÇA"}</button>
+      <button id="btnC" onclick="confirmar('vou')">${full?"Entrar na lista de espera":"Confirmar presença"}</button>
       <div class="two"><button class="ghost" onclick="confirmar('talvez')">Talvez</button><button class="ghost" onclick="confirmar('nao')">Não vou</button></div>
-      <div class="hint">Só quem está 🟢 Vou jogar ocupa vaga.</div>`;
+      <div class="hint">Só quem marca “Vou jogar” ocupa vaga.</div>`;
   }
   app.innerHTML=tabsHTML()+`
-  <div class="card hero"><div class="tag">Próximo jogo</div>
+  <div class="pres-top"><div class="card hero"><div class="tag">Próximo jogo</div>
     <div class="info"><div><span>${ico("cal")}</span>${esc(fmtDate(match.date))}</div><div><span>${ico("clock")}</span>${esc(fmtTime(match.time))}</div><div><span>${ico("pin")}</span>${esc(match.location||"A definir")}</div></div>
     <div class="cnt"><span><b>${n} / ${max}</b> confirmados</span><span>${pct}%</span></div>
     <div class="bar"><i style="width:${pct}%"></i></div>
-    ${!match.open?`<div class="badge">🔒 Confirmações encerradas</div>`:full?`<div class="badge">🔥 JOGO LOTADO — entre na lista de espera</div>`:""}
+    ${!match.open?`<div class="badge off">Confirmações encerradas</div>`:full?`<div class="badge">Jogo lotado — entre na lista de espera</div>`:""}
   </div>
   <div class="card">${action}<div class="msg ${msg.c}">${esc(msg.t)}</div></div>
-  <div class="two" style="margin:-4px 0 14px"><button onclick="share()">COMPARTILHAR JOGO</button><button class="ghost" onclick="wa()">WhatsApp</button></div>
-  <div class="card"><div class="head"><h2>CONFIRMADOS</h2><b>${n} / ${max}</b></div>
-    ${n?`<ol>${g.vou.map((p,i)=>li(p,i+1)).join("")}</ol>`:`<div class="empty">Ninguém confirmou ainda. Seja o primeiro! 🔥</div>`}</div>
-  ${g.talvez.length?`<div class="card"><div class="head"><h2>TALVEZ</h2><b>${g.talvez.length}</b></div><ol>${g.talvez.map((p,i)=>li(p,"?")).join("")}</ol></div>`:""}
-  ${g.espera.length?`<div class="card"><div class="head"><h2>LISTA DE ESPERA</h2><b>${g.espera.length}</b></div><ol>${g.espera.map((p,i)=>li(p,max+i+1,"w")).join("")}</ol></div>`:""}
-  ${hist.length?`<details><summary>HISTÓRICO</summary><div class="in2">${hist.map(h=>`<div class="hi"><span>${fmtShort(h.date)}</span><span>${h.n} jogadores</span></div>`).join("")}</div></details>`:""}`;
+  <div class="two" style="margin:-4px 0 14px"><button onclick="share()">Compartilhar jogo</button><button class="ghost" onclick="wa()">WhatsApp</button></div></div>
+  <div class="lists"><div class="card"><div class="head"><h2>Confirmados</h2><b>${n} / ${max}</b></div>
+    ${n?`<ol>${g.vou.map((p,i)=>li(p,i+1)).join("")}</ol>`:`<div class="empty">Ninguém confirmou ainda. Seja o primeiro!</div>`}</div>
+  ${g.talvez.length?`<div class="card"><div class="head"><h2>Talvez</h2><b>${g.talvez.length}</b></div><ol>${g.talvez.map((p,i)=>li(p,"?")).join("")}</ol></div>`:""}
+  ${g.espera.length?`<div class="card"><div class="head"><h2>Lista de espera</h2><b>${g.espera.length}</b></div><ol>${g.espera.map((p,i)=>li(p,max+i+1,"w")).join("")}</ol></div>`:""}</div>
+  ${hist.length?`<details><summary>Histórico</summary><div class="in2">${hist.map(h=>`<div class="hi"><span>${fmtShort(h.date)}</span><span>${h.n} jogadores</span></div>`).join("")}</div></details>`:""}`;
   const inp=$("#nome"); if(inp){ inp.addEventListener("keydown",e=>{if(e.key==="Enter")confirmar("vou")}); if(keepName) inp.focus() }
 }
 
@@ -688,14 +695,14 @@ function timesHTML(){
   else{
     const cur=s.cur||[0,1], q=s.queue||[], res=s.reserves||[], n=i=>teams[i]?teams[i].players.length:0;
     h+=`<div class="card"><div class="tag">Partida atual</div><div class="vs"><div>${pill(cur[0])}<small>${n(cur[0])} jogadores</small></div><b>VS</b><div>${pill(cur[1])}<small>${n(cur[1])} jogadores</small></div></div>
-    ${adm?(fin?`<div class="in y" style="margin-top:14px"><b>Quem fica em campo?</b></div><div class="two"><button onclick="finalizar(${cur[0]})">${tm(cur[0]).e} Time ${cur[0]+1} fica</button><button onclick="finalizar(${cur[1]})">${tm(cur[1]).e} Time ${cur[1]+1} fica</button></div><div class="two"><button class="ghost" onclick="finalizar(null)">Ambos saem</button><button class="ghost" onclick="fin=false;render()">Cancelar</button></div>`:`<button style="margin-top:14px" onclick="fin=true;render()">FINALIZAR PARTIDA</button>`):""}</div>
+    ${adm?(fin?`<div class="in y" style="margin-top:14px"><b>Quem fica em campo?</b></div><div class="two"><button onclick="finalizar(${cur[0]})">${tm(cur[0]).e} Time ${cur[0]+1} fica</button><button onclick="finalizar(${cur[1]})">${tm(cur[1]).e} Time ${cur[1]+1} fica</button></div><div class="two"><button class="ghost" onclick="finalizar(null)">Ambos saem</button><button class="ghost" onclick="fin=false;render()">Cancelar</button></div>`:`<button style="margin-top:14px" onclick="fin=true;render()">Finalizar partida</button>`):""}</div>
     <div class="card"><div class="tag">Próxima partida</div>${q.length?q.map(i=>`<div class="nx">${pill(i)}<small>aguardando · ${n(i)} jogadores</small></div>`).join(""):`<div class="empty" style="padding:6px">Só 2 times: os mesmos voltam a jogar.</div>`}</div>`;
-    h+=teams.map((t,i)=>`<div class="card tm" style="animation-delay:${i*.12}s"><div class="head">${pill(i)}<b>${t.players.length}</b></div><ol>${t.players.map((nm,j)=>`<li><em>${j+1}</em><span>${esc(nm)}</span>${adm?mvSel(i,j,teams.length):""}</li>`).join("")}</ol></div>`).join("");
-    if(res.length) h+=`<div class="card"><div class="head"><h2>PRÓXIMOS / RESERVAS</h2><b>${res.length}</b></div><ol>${res.map((nm,j)=>`<li class="w"><em>${j+1}</em><span>${esc(nm)}</span>${adm?mvSel("r",j,teams.length):""}</li>`).join("")}</ol><div class="hint">Esses jogadores entram na próxima partida.</div></div>`;
+    h+=`<div class="tm-grid">`+teams.map((t,i)=>`<div class="card tm" style="animation-delay:${i*.12}s"><div class="head">${pill(i)}<b>${t.players.length}</b></div><ol>${t.players.map((nm,j)=>`<li><em>${j+1}</em><span>${esc(nm)}</span>${adm?mvSel(i,j,teams.length):""}</li>`).join("")}</ol></div>`).join("")+`</div>`;
+    if(res.length) h+=`<div class="card"><div class="head"><h2>Próximos / reservas</h2><b>${res.length}</b></div><ol>${res.map((nm,j)=>`<li class="w"><em>${j+1}</em><span>${esc(nm)}</span>${adm?mvSel("r",j,teams.length):""}</li>`).join("")}</ol><div class="hint">Esses jogadores entram na próxima partida.</div></div>`;
     if(adm) h+=setupCard(g);
   }
   const hs=s.hist||[];
-  if(hs.length) h+=`<div class="card"><div class="tag">Histórico das partidas</div>${hs.map((x,i)=>`<div class="hi"><span>🏆 PARTIDA ${i+1}</span><span>${tm(x.a).e} Time ${x.a+1} x ${tm(x.b).e} Time ${x.b+1} · ${Math.round(x.dur/6)/10} min · Finalizada</span></div>`).reverse().join("")}</div>`;
+  if(hs.length) h+=`<div class="card"><div class="tag">Histórico das partidas</div>${hs.map((x,i)=>`<div class="hi"><span>Partida ${i+1}</span><span>${tm(x.a).e} Time ${x.a+1} x ${tm(x.b).e} Time ${x.b+1} · ${Math.round(x.dur/6)/10} min · Finalizada</span></div>`).reverse().join("")}</div>`;
   return h;
 }
 
@@ -796,9 +803,12 @@ function admHTML(a){
   at=a.ms.filter(m=>m.ativo), dev=at.filter(m=>!paid.has(m.id)), pend=a.pg.filter(x=>x.status==="aguardando"),
   dm=a.ds.filter(d=>d.status==="confirmada"&&d.data.startsWith(ano)&&+d.data.slice(5,7)===mes),
   s1=pg.reduce((s,x)=>s+ +x.valor,0), s2=dm.reduce((s,d)=>s+ +d.valor,0), k=(b,l)=>`<div class="in"><b>${b}</b><span>${l}</span></div>`;
+  const sit=m=>{const ps=a.pg.filter(x=>x.mensalidades.mensalista_id===m.id&&x.mensalidades.ano===ano&&x.mensalidades.mes===mes);return ps.find(x=>x.status==="pago")||ps.find(x=>x.status==="aguardando")||ps[0]},
+  sitH=`<div class="card"><div class="tag">Situação de ${MESES[mes-1]}/${ano}</div>${at.length?at.map(m=>{const x=sit(m),c=!x?'<span class="chip">Sem comprovante</span>':x.status==="pago"?'<span class="chip g">Pago</span>':x.status==="aguardando"?'<span class="chip y">Aguardando conferência</span>':'<span class="chip r">Recusado</span>',env=x&&x.enviado_em?" · enviado em "+fmtShort(String(x.enviado_em).slice(0,10)):"";return `<div class="tr"><b>${esc(m.nome)}</b>${c}<span class="wx-s">${brl(x?x.valor:M.pub.valor)}${env}</span>${x&&x.arquivo?`<button class="sm ghost" onclick="ver('${esc(x.arquivo)}')">Comprovante</button>`:""}</div>`}).join(""):'<div class="empty">Nenhum mensalista ativo. Cadastre o primeiro em “Mensalistas e valor”.</div>'}</div>`;
   return `<div class="card"><div class="tag">Financeiro · admin · ${MESES[mes-1]}/${ano}</div>
   <div class="row">${k(at.length,"mensalistas ativos")}${k(pg.length,"pagamentos confirmados")}</div><div class="row" style="margin-top:10px">${k(brl(s1),"arrecadado")}${k(brl(s2),"despesas")}</div><div class="in" style="margin-top:10px"><b>${brl(s1-s2)}</b><span>saldo do mês</span></div></div>
   <div class="card"><div class="tag">Aguardando conferência (${pend.length})</div>${pend.length?`<ol>${pend.map(x=>`<li><span>${esc(x.mensalidades.mensalistas.nome)} · ${MESES[x.mensalidades.mes-1]}/${x.mensalidades.ano}</span><button class="sm ghost" onclick="ver('${esc(x.arquivo)}')">Ver</button><button class="sm" onclick="aprovar('${x.id}')">Aprovar</button><button class="danger sm" onclick="recusar('${x.id}')">Recusar</button></li>`).join("")}</ol><div class="hint">Ver abre o comprovante · Aprovar confirma · Recusar recusa. Só pagamentos aprovados contam no saldo.</div>`:'<div class="empty">Nada pendente.</div>'}</div>
+  ${sitH}
   <div class="card"><div class="tag">Sem pagamento em ${MESES[mes-1]} (só admin) · ${dev.length}</div><button class="ghost" onclick="lemb()">Copiar lembrete geral</button>
   ${dev.length?`<ol style="margin-top:10px">${dev.map(m=>`<li><span>${esc(m.nome)}</span><button class="sm ghost" onclick="lemb(${m.id})">Copiar</button></li>`).join("")}</ol>`:'<div class="empty">Todos em dia 🎉</div>'}</div>
   <div class="card"><div class="tag">Mensalistas e valor</div><div class="row"><div><label>Valor mensal (R$)</label><input id="cv" inputmode="decimal" value="${M.pub.valor}"></div><div><label>Chave Pix</label><input id="cp" value="${esc(M.pub.pix||"")}"></div></div><button onclick="cfg()">Salvar valor/Pix</button>
